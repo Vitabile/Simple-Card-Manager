@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .container {
+      margin-top: 100px;
+    }
+
+	
+	.custom-card {
+    	width: 300px; 
+    	height: 170px; 
+  	}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand">Homepage</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				  <li class="nav-item">
+					<a sec:authorize="isAuthenticated()" class="nav-link active" aria-current="page" th:href="@{/transaction/report}">Report Transactions</a>
+				  </li>
+			  </div>
+			<a sec:authorize="isAuthenticated()" href="/logout" type="button" class="btn btn-primary d-flex">Logout</a> 
+		</div>
+	  </nav>
+	<br><br>
+	<div class="'container">
+		<div class="row justify-content-center">
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="col-sm-3">
+				<div class="card text-center custom-card">
+				  <div class="card-body">
+					<h5 class="card-title">Create Card</h5>
+					<p class="card-text">To create new cards.</p>
+					
+				  </div>
+				  <div class="card-footer">
+					<a href="/create" class="btn btn-primary">Create</a>
+				</div>
+				</div>
+			  </div>
+			<div class="col-sm-3">
+				<div class="card text-center custom-card">
+				  <div class="card-body">
+					<h5 class="card-title">Check Credit</h5>
+					<p class="card-text">To check the remaining credit in a existing card.</p>
+					
+				  </div>
+				  <div class="card-footer">
+					<a href="/credit" class="btn btn-primary">Credit</a>
+				</div>
+				</div>
+			  </div>
+			<div class="col-sm-3">
+				<div class="card text-center custom-card" >
+				  <div class="card-body">
+					<h5 class="card-title">Transaction</h5>
+					<p class="card-text">To adding or removing credit from a card.</p>
+					
+				  </div>
+				  <div class="card-footer">
+					<a href="/transaction" class="btn btn-primary">Transaction</a>
+				</div>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<div class="row justify-content-center">
+	
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="col-sm-3 mb-3 mb-sm-0">
+				<div class="card text-center custom-card">
+					<div class="card-body">
+						<h5 class="card-title">Manage Card</h5>
+						<p class="card-text">To block or unblock existing cards.</p>
+					</div>
+					<div class="card-footer">
+						<a href="/card/manage" class="btn btn-primary">Manage Card</a>
+					</div>
+				</div>
+			</div>
+
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="col-sm-3 mb-3 mb-sm-0">
+				<div class="card text-center custom-card">
+					<div class="card-body">
+						<h5 class="card-title">Manage Merchant</h5>
+						<p class="card-text">To active and disable existing merchants.</p>
+					</div>
+					<div class="card-footer">
+						<a href="/merchant/manage" class="btn btn-primary">Manage Merchant</a>
+					</div>
+				</div>
+			</div>
+		
+		
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="col-sm-3">
+				<div class="card text-center custom-card">
+				  <div class="card-body">
+					<h5 class="card-title">Register Merchant</h5>
+					<p class="card-text">To register new merchants.</p>
+					
+				  </div>
+				  <div class="card-footer">
+					<a href="/merchant/register" class="btn btn-primary">Register</a>
+				</div>
+				</div>
+			  </div>
+
+			</div>
+		</div>
+	</div>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Merchant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .container {
+      margin-top: 50px;
+      width: 500px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand">Manage merchant</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a sec:authorize="isAuthenticated()" class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+          </li>
+      </div>
+			<a href="/logout" type="button" class="btn btn-primary d-flex">Logout</a> 
+		</div>
+	</nav>
+
+  <div class="container">
+    <form method="post" th:action="@{/merchant/manage}" class="text-center">
+      <div class="mb-3">
+        <label for="text" class="form-label">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+      </div>
+      <button type="submit" name="action" value="activate" class="btn btn-primary">Activate</button>
+	    <button type="submit" name="action" value="disable" class="btn btn-danger">Disable</button>
+    </form>
+    <br><br>
+    <div class="alert alert-success" role="alert" th:if="${disabled}">Merchant was correctly disabled!</div>
+	  <div class="alert alert-success" role="alert" th:if="${activated}">Merchant was correctly activated!</div>
+    <div th:if="${errDis}" class="alert alert-danger" role="alert">Merchant already disabled!</div>
+	  <div th:if="${errAct}" class="alert alert-danger" role="alert">Merchant already activated!</div>
+	  <div th:if="${errUser}" class="alert alert-danger" role="alert">Username don't match with a existing merchant!</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

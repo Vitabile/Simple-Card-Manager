@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access denied</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    
+    body {
+      text-align: center;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .container {
+      margin-top: 50px;
+      width: 500px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Access denied</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a sec:authorize="isAuthenticated()" class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+            </li>
+        </div>
+        <a sec:authorize="isAnonymous()" href="/login" type="button" class="btn btn-primary d-flex">Login</a> 
+        <a sec:authorize="isAuthenticated()" href="/logout" type="button" class="btn btn-primary d-flex">Logout</a> 
+    </div>
+  </nav>
+
+  <div class="container">
+    <br><br>
+    <p>You are not authorized to access this page!<br>Please go back to home.</p>
+    <a  href="/home" type="button" class="btn btn-primary">Home</a> 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
